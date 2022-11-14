@@ -1,0 +1,93 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class KopiKenangan {
+    int JumCupKopi = 4;
+    public static int totalJumCupKopi = 1250;
+    public static String[] KopiLatteDontBeLate = new String[400];
+    public static String[] KopiGoncangJiwa = new String[300];
+    public static String[] KopiJalanKenangan = new String[300];
+    public static String[] KopiTanpaRasa = new String[250];
+
+    public static void PrintInfoCupKopi() {
+        int totalKopiLatteDontBeLate = 0;
+        int totalSisaKuota = 0;
+        for (int i = 0; i < KopiLatteDontBeLate.length; i++) {
+            if (KopiLatteDontBeLate[i] != null) {
+                totalKopiLatteDontBeLate++;
+            }
+        }
+        int totalKopiGoncangJiwa = 0;
+        for (int i = 0; i < KopiGoncangJiwa.length; i++) {
+            if (KopiGoncangJiwa[i] != null) {
+                totalKopiGoncangJiwa++;
+            }
+        }
+        int totalKopiJalanKenangan = 0;
+        for (int i = 0; i < KopiJalanKenangan.length; i++) {
+            if (KopiJalanKenangan[i] != null) {
+                totalKopiJalanKenangan++;
+            }
+        }
+        int totalKopiTanpaRasa = 0;
+        for (int i = 0; i < KopiTanpaRasa.length; i++) {
+            if (KopiTanpaRasa[i] != null) {
+                totalKopiTanpaRasa++;
+            }
+        }
+        totalSisaKuota = totalJumCupKopi - totalKopiLatteDontBeLate - totalKopiGoncangJiwa - totalKopiJalanKenangan - totalKopiTanpaRasa;
+        System.out.println("Total Kopi Latte Dont Be Late: " + totalKopiLatteDontBeLate + "Total Kopi Goncang Jiwa: " + totalKopiGoncangJiwa + "Total Kopi Jalan Kenangan: " + totalKopiJalanKenangan + "Total Kopi Tanpa Rasa: " + totalKopiTanpaRasa);
+        System.out.println("Total Kopi Terbanyak: " + totalJumCupKopi + "Total Sisa Kuota: " + totalSisaKuota);
+        System.out.println();
+    }
+
+    public static void CupKopi(String[] myArray, String jumKopiTerbanyak) {
+        int indexNow = 0;
+        for (int i = 0; i < myArray.length; i++) {
+            if (myArray[i] != null) {
+                indexNow = i + 1;
+            }
+        }
+        if (indexNow < myArray.length) {
+            myArray[indexNow] = jumKopiTerbanyak;
+        }
+    }
+
+    public static void simpanKopi(int menuRandom, String Kopi) {
+        switch (menuRandom) {
+            case 1:
+                CupKopi(KopiLatteDontBeLate, Kopi);
+                System.out.println("Kopi Latte Dont Be Late");
+                break;
+            case 2:
+                CupKopi(KopiGoncangJiwa, Kopi);
+                System.out.println("Kopi Goncang Jiwa");
+                break;
+            case 3:
+                CupKopi(KopiJalanKenangan, Kopi);
+                System.out.println("Kopi Jalan Kenangan");
+                break;
+            case 4:
+                CupKopi(KopiTanpaRasa, Kopi);
+                System.out.println("Kopi Tanpa Rasa");
+                break;
+        }
+    }
+    public static void InputKopi() {
+        Scanner inputData = new Scanner(System.in);
+        while (true) {
+            String namaKopi = inputData.nextLine();
+            if (namaKopi.isBlank()) {
+                InputKopi();
+            } else {
+                Random hasilRandom = new Random();
+                int jenisRandom = hasilRandom.nextInt(4) + 1;
+                simpanKopi(jenisRandom, namaKopi);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        InputKopi();
+    }
+}
